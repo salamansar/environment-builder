@@ -57,7 +57,6 @@
                 <executions>
                     <execution>
                         <id>attach-sources</id>
-                        <phase>validate</phase>
                         <goals>
                             <goal>jar-no-fork</goal>
                         </goals>
@@ -71,12 +70,34 @@
                 <executions>
                     <execution>
                         <id>attach-javadoc</id>
-                        <phase>validate</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-jars</id>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                        <phase>verify</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.5</version>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                </configuration>
             </plugin>
         </plugins>
     </build>
