@@ -16,7 +16,7 @@ import java.util.Map;
  * Пример использования:
  * <pre>
  *     //есть лист объектов
- *     List&lt;ParentClass> objects = getListObjects();
+ *     List&lt;ParentClass&gt; objects = getListObjects();
  *     //создаем и настраиваем хелпер
  *     CheckListHelper.create()
  *          .addTypeCheck(ChildClass1.class, 3) //3 штуки дочернего класса
@@ -36,12 +36,12 @@ import java.util.Map;
  *     ...
  *
  *     //получаем лист объектов
- *     List&lt;SomeClass> objects = getListObjects();
+ *     List&lt;SomeClass&gt; objects = getListObjects();
  *     CheckListHelper.create()
  *          .addTypeCheck(ChildNestedClass1.class, 3)
  *          .addTypeCheck(ChildNestedClass2.class, 5)
- *          .useTypeResolver(new TypeResolver&lt;SomeClass> () {
- *              public Class&lt;?> getObjectClass(SomeClass object) {
+ *          .useTypeResolver(new TypeResolver&lt;SomeClass&gt; () {
+ *              public Class&lt;?&gt; getObjectClass(SomeClass object) {
  *                  return object.dto.getClass();
  *              }
  *          })

@@ -3,7 +3,7 @@ package org.envbuild.check;
 import org.envbuild.common.Pair;
 
 /**
- * Результат проверки пары {@link su.ivt.helios.shared.Pair}, которая часто возникает,
+ * Результат проверки пары {@link org.envbuild.common.Pair}, которая часто возникает,
  * например, при проверке количества детей для пачки объектов
  * @author kovlyashenko
  */

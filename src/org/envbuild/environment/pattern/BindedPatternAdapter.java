@@ -36,7 +36,7 @@ public abstract class BindedPatternAdapter extends AbstractPattern implements Bi
     
     /**
      * В этом методе проводим инициализацию паттерна
-     * @throws su.ivt.test.environment.pattern.PatternInitializationException не удалось инициализировать
+     * @throws org.envbuild.exception.PatternInitializationException не удалось инициализировать
      */
     protected abstract void doInitialize() throws PatternInitializationException;
 

@@ -1,7 +1,7 @@
 package org.envbuild.common;
 
 /**
- * Примитивный класс, хранящий в себе 2 параметра. По сути, копия {@link com.google.gwt.dev.json.Pair},
+ * Примитивный класс, хранящий в себе 2 параметра. По сути, копия com.google.gwt.dev.json.Pair,
  * только еще добавлены гетеры для полей и дефолтный конструктор
  * @author vinakov
  */

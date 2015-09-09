@@ -10,13 +10,13 @@ public interface BindedPattern {
 
     /**
      * Привязан ли паттерн к целевым объектам
-     * @return 
+     * @return true - привязан, false - нет
      */
     boolean isBinded();
     
     /**
      * Произвести инициализацию паттерна - настроить его на работу с привязкой
-     * @throws su.ivt.test.environment.pattern.PatternInitializationException ошибка инициализации
+     * @throws org.envbuild.exception.PatternInitializationException ошибка инициализации
      */
     void initializePattern() throws PatternInitializationException ;
 }
