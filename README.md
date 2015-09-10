@@ -17,3 +17,19 @@ Note: if you use windows (especially win8), then you might use another program f
 4. If you use NetBeans and it was run at moment of key creation, then restart IDE.
 
 5. Now you can build and deploy project.
+
+#
+## Deploying artifact on Maven Central ##
+#
+For deploying you must have account in https://issues.sonatype.org .
+Credentials from that resource must be included in your setting.xml in .m2 directory like this:
+
+    <settings>
+      <servers>
+        <server>
+          <id>ossrh</id>
+          <username>your-jira-id</username>
+          <password>your-jira-pwd</password>
+        </server>
+      </servers>
+    </settings>
