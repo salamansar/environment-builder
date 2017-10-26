@@ -1,4 +1,4 @@
-package org.envbuild.hibernate;
+package org.envbuild.hibernate4;
 
 import org.hibernate.Session;
 import static org.mockito.Mockito.*;

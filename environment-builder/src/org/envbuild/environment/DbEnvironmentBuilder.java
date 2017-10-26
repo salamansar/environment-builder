@@ -1,14 +1,13 @@
 package org.envbuild.environment;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.envbuild.hibernate.SessionFactory;
 import org.envbuild.generator.RandomGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.envbuild.generator.DomainGenerator;
+import org.envbuild.generator.processor.DomainPersister;
 
 /**
  * @author kovlyashenko
@@ -19,7 +18,7 @@ public class DbEnvironmentBuilder {
     @DomainGenerator
     protected RandomGenerator randomGenerator;
     @Autowired
-    protected SessionFactory sessionFactory;
+    protected DomainPersister domainPersister;
     protected DbEnvironment environment;
 
 
@@ -47,8 +46,7 @@ public class DbEnvironmentBuilder {
         environment.addObject(className, instance);
         lastObject = instance;
         if (isPersist) {
-            sessionFactory.getCurrentSession().save(lastObject);
-            sessionFactory.getCurrentSession().refresh(lastObject); //нужно чтобы заполнить path
+            domainPersister.persistDomain(lastObject);
         }
         return this;
     }

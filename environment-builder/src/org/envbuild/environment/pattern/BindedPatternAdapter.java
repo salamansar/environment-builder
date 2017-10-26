@@ -3,7 +3,7 @@ package org.envbuild.environment.pattern;
 import org.envbuild.exception.PatternInitializationException;
 import org.envbuild.environment.DbEnvironment;
 import org.envbuild.environment.DbEnvironmentBuilder;
-import org.envbuild.hibernate.SessionFactory;
+import org.envbuild.generator.processor.DomainPersister;
 
 /**
  * Адаптер для привязки к объектам и инициализации паттерна.
@@ -11,7 +11,7 @@ import org.envbuild.hibernate.SessionFactory;
  */
 public abstract class BindedPatternAdapter extends AbstractPattern implements BindedPattern {
     protected DbEnvironmentBuilder environmentBuilder;
-    protected SessionFactory sessionFactory;
+    protected DomainPersister domainPersister;
     
     protected BindedPatternAdapter(String name) {
         super(name);
@@ -42,14 +42,14 @@ public abstract class BindedPatternAdapter extends AbstractPattern implements Bi
 
     @Override
     public boolean isBinded() {
-        return environmentBuilder != null && sessionFactory != null;
+        return environmentBuilder != null && domainPersister != null;
     }
     
     public void setEnvironmentBuilder(DbEnvironmentBuilder environmentBuilder) {
         this.environmentBuilder = environmentBuilder;
     }
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public void setSessionFactory(DomainPersister domainPersister) {
+        this.domainPersister = domainPersister;
     }
 }

@@ -1,4 +1,4 @@
-package org.envbuild.hibernate;
+package org.envbuild.hibernate4;
 
 /**
  *

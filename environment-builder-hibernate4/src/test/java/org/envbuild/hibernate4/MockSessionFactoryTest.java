@@ -1,8 +1,8 @@
-package org.envbuild.hibernate;
+package org.envbuild.hibernate4;
 
-import org.envbuild.hibernate.SessionFactory;
-import org.envbuild.hibernate.MockSessionFactory;
-import org.envbuild.hibernate.MockSessionProvider;
+import org.envbuild.hibernate4.SessionFactory;
+import org.envbuild.hibernate4.MockSessionFactory;
+import org.envbuild.hibernate4.MockSessionProvider;
 import org.hibernate.Session;
 import org.junit.Test;
 import static org.junit.Assert.*;

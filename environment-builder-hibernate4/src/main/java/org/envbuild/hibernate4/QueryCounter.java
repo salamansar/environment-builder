@@ -1,4 +1,4 @@
-package org.envbuild.hibernate;
+package org.envbuild.hibernate4;
 
 import javax.annotation.PostConstruct;
 import org.hibernate.stat.Statistics;
