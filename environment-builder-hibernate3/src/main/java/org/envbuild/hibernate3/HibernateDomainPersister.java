@@ -25,6 +25,7 @@ public class HibernateDomainPersister implements DomainPersister {
     @Override
     public void persistDomain(Object domain) {
         sessionFactory.getCurrentSession().save(domain);
+        sessionFactory.getCurrentSession().flush();
         sessionFactory.getCurrentSession().refresh(domain);
     }
     
