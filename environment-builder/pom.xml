@@ -4,11 +4,9 @@
     <parent>
         <groupId>com.github.salamansar.envbuild</groupId>
         <artifactId>environment-builder-parent</artifactId>
-        <version>0.7-SNAPSHOT</version>
+        <version>0.8-SNAPSHOT</version>
     </parent>
-    <groupId>com.github.salamansar.envbuild</groupId>
     <artifactId>environment-builder</artifactId>
-    <version>0.7-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <name>Environment Builder</name>
