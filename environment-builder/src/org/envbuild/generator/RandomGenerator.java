@@ -2,7 +2,6 @@ package org.envbuild.generator;
 
 import com.google.common.collect.Iterables;
 import java.lang.reflect.InvocationTargetException;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -14,8 +13,6 @@ import org.envbuild.generator.factory.RandomizerFactory;
  * Не заполняются так же генерик поля
  * @author kovlyashenko
  */
-@Component
-@SimpleGenerator
 public class RandomGenerator {
     private RandomizerFactory randomizerFactory = new RandomizerFactory();
     private Set<Method> visitedMethods = new HashSet<Method>();

@@ -93,8 +93,8 @@ public class MockDomainGeneratorTest {
     @Before
     public void setUp() {
         generator = new MockDomainGenerator();
-        generator.postProcessAfterInitialization(aProcessor, "aProcessor");
-        generator.postProcessAfterInitialization(bProcessor, "bProcessor");
+        generator.addDomainProcessor(aProcessor);
+        generator.addDomainProcessor(bProcessor);
     }
     
 

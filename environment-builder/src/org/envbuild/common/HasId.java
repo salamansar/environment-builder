@@ -6,6 +6,7 @@ package org.envbuild.common;
  * @param <IDType> тип идишника
  * @author kovlyashenko
  */
+@Deprecated
 public interface HasId<IDType> {
     IDType getId();
     void setId(IDType id);

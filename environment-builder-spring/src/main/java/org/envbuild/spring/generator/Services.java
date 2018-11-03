@@ -1,4 +1,4 @@
-package org.envbuild.generator;
+package org.envbuild.spring.generator;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

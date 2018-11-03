@@ -1,23 +1,22 @@
 package org.envbuild.environment;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.Stack;
 
 /**
  * @author kovlyashenko
  */
-@Component
 public class EnvironmentPrototypeBuilder {
     private Chain rootChain;
     private Chain currentChain;
     private ChainSection currentChainSection;
     private Stack<Chain> chainsStack = new Stack<Chain>();
     private Stack<ChainSection> sectionsStack = new Stack<ChainSection>();
-    @Autowired
     private DbEnvironmentBuilder environmentBuilder;
+
+    public EnvironmentPrototypeBuilder(DbEnvironmentBuilder environmentBuilder) {
+        this.environmentBuilder = environmentBuilder;
+    }
 
     public EnvironmentPrototypeBuilder newBuild() {
         rootChain = new Chain();

@@ -1,26 +1,30 @@
 package org.envbuild.environment;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.envbuild.generator.RandomGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.envbuild.generator.DomainGenerator;
 import org.envbuild.generator.processor.DomainPersister;
 
 /**
  * @author kovlyashenko
  */
-@Component
 public class DbEnvironmentBuilder {
-    @Autowired
-    @DomainGenerator
     protected RandomGenerator randomGenerator;
-    @Autowired
     protected DomainPersister domainPersister;
     protected DbEnvironment environment;
 
+    public DbEnvironmentBuilder() {
+    }
+
+    public DbEnvironmentBuilder(RandomGenerator randomGenerator) {
+        this.randomGenerator = randomGenerator;
+    }
+
+    public DbEnvironmentBuilder(RandomGenerator randomGenerator, DomainPersister domainPersister) {
+        this.randomGenerator = randomGenerator;
+        this.domainPersister = domainPersister;
+    }
 
     protected Map<Class<?>, Object> parentsMap = new HashMap<Class<?>, Object>(5);
     private Object lastObject;
@@ -101,4 +105,21 @@ public class DbEnvironmentBuilder {
     public DbEnvironment getEnvironment() {
         return environment;
     }
+
+    public RandomGenerator getRandomGenerator() {
+        return randomGenerator;
+    }
+
+    public void setRandomGenerator(RandomGenerator randomGenerator) {
+        this.randomGenerator = randomGenerator;
+    }
+
+    public DomainPersister getDomainPersister() {
+        return domainPersister;
+    }
+
+    public void setDomainPersister(DomainPersister domainPersister) {
+        this.domainPersister = domainPersister;
+    }
+    
 }

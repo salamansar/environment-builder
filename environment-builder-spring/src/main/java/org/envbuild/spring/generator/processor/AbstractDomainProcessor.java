@@ -1,8 +1,10 @@
-package org.envbuild.generator.processor;
+package org.envbuild.spring.generator.processor;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.envbuild.generator.DomainGenerator;
+import org.envbuild.spring.generator.DomainGenerator;
 import org.envbuild.generator.RandomGenerator;
+import org.envbuild.generator.processor.DomainPersister;
+import org.envbuild.generator.processor.DomainPostProcessor;
 
 /**
  * @author kovlyashenko

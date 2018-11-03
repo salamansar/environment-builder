@@ -1,16 +1,15 @@
-package org.envbuild.environment.pattern;
+package org.envbuild.spring.environment.pattern;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.envbuild.environment.pattern.DbEnvironmentPattern;
 
 /**
  * @author kovlyashenko
  */
-@Component
 public class DbEnvironmentPatternRegistry implements BeanPostProcessor {
     private Map<String, DbEnvironmentPattern> patternMap = new HashMap<String, DbEnvironmentPattern>();
 
