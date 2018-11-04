@@ -49,7 +49,7 @@ public class DbEnvironmentBuilder {
         Object instance = randomGenerator.generate(className, parentsMap.values().toArray());
         environment.addObject(className, instance);
         lastObject = instance;
-        if (isPersist) {
+        if (isPersist && domainPersister != null) {
             domainPersister.persistDomain(lastObject);
         }
         return this;
