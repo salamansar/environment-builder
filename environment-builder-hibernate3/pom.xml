@@ -10,6 +10,11 @@
     <name>Environment Builder. Hibernate 3</name>
     <packaging>jar</packaging>
     
+    <description>
+        Library for facilitation of integration Environment Builder 
+        with Hibernate 3.x
+    </description>
+    
     <dependencies>
         <dependency>
             <groupId>com.github.salamansar.envbuild</groupId>

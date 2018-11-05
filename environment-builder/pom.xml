@@ -11,8 +11,8 @@
     
     <name>Environment Builder</name>
     <description>
-        This lib is made for build objects hierarchy 
-        in database before integration testing will be executed.
+        Core library of environment builder. Contains most useful classes
+        which not bound to any framework.
     </description>
     
     <build>
