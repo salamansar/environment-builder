@@ -1,11 +1,9 @@
 package org.envbuild.generator;
 
-import org.envbuild.generator.InstanceFillingStrategy;
-import org.envbuild.generator.RandomGenerator;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -190,6 +188,7 @@ public class RandomGeneratorTest {
         TestBigIntegerClass testClass = generator.generate(TestBigIntegerClass.class);
         Assert.assertNotNull(testClass.getBigIntVal());
         Assert.assertNotNull(testClass.getBigDecimalVal());
+		Assert.assertEquals(2, testClass.getBigDecimalVal().scale());
     }
     
     @Test
