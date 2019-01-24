@@ -26,4 +26,23 @@ For creation of object org.envbuild.generator.RandomGenerator is used.
     RandomGenerator generator = new RandomGenerator();
     SomeClass obj = generator.generate(SomeClass.class); 
 ```
-There SomeClass contains simple fields like String, Double, etc. After generation it will be filled with random values.
+There SomeClass is a POJO-class, which contains simple fields like String, Double, etc with getters and setters. After generation it will be filled with random values.
+If class contains not-simple fields with some other class, then this filed will not be filled be default. For recursive generations such objects you might turn on this feature with special flag:
+```java
+	RandomGenerator generator = new RandomGenerator();
+	SomeClass obj = generator.generate(SomeClass.class, true); //flag true enables recursive generation 
+``` 
+Instead that when you have object, which must be set into some field in the class, then instead directly setting this object, you might pass them into generate method. Generator will find setters by passed objects type and set this property himself.
+Instead
+```java
+	SomeOtherClass otherObj = ...
+	RandomGenerator generator = new RandomGenerator();
+	SomeClass obj = generator.generate(SomeClass.class);
+	obj.setOther(otherObject);
+``` 
+You might use
+```java
+	SomeOtherClass otherObj = ...
+	RandomGenerator generator = new RandomGenerator();
+	SomeClass obj = generator.generate(SomeClass.class, otherObj); //property other will be set by generator
+``` 
