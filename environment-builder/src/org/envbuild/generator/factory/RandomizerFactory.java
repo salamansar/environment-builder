@@ -13,9 +13,14 @@ import java.util.Map;
 public class RandomizerFactory {
     
     private Map<Class, ValueRandomizer> randomizersMap = new HashMap<Class, ValueRandomizer>();
+	private EnumRandomizerFactory enumRandomizerFactory = new EnumRandomizerFactory();
     
-    public ValueRandomizer getRandomizer(Class generateClass) {
-        return randomizersMap.get(generateClass);
+    public <T> ValueRandomizer<T> getRandomizer(Class<T> generateClass) {
+		if (generateClass.isEnum()) {
+			return (ValueRandomizer<T>) enumRandomizerFactory.getRandomizer(generateClass.asSubclass(Enum.class));
+		} else {
+			return randomizersMap.get(generateClass);
+		}
     }
     
     public void initialize() {
@@ -41,7 +46,7 @@ public class RandomizerFactory {
     }
     
     public boolean hasRandomizer(Class generateClass) {
-        return randomizersMap.containsKey(generateClass);
+        return generateClass.isEnum() || randomizersMap.containsKey(generateClass);
     }
 
 }

@@ -3,7 +3,6 @@ package org.envbuild.generator;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
-import org.junit.Assert;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -106,6 +105,34 @@ public class RandomGeneratorTest {
         
         
     }
+	
+	static enum F {
+		FIRST,
+		SECOND,
+		THIRD
+	}
+	
+	static class G {
+		F enumField;
+		String strFeild;
+
+		public F getEnumField() {
+			return enumField;
+		}
+
+		public void setEnumField(F enumField) {
+			this.enumField = enumField;
+		}
+
+		public String getStrFeild() {
+			return strFeild;
+		}
+
+		public void setStrFeild(String strFeild) {
+			this.strFeild = strFeild;
+		}
+		
+	}
     
     RandomGenerator generator = new RandomGenerator();
 
@@ -296,5 +323,47 @@ public class RandomGeneratorTest {
 		assertNotNull(instance.link);
 		assertEquals(str, instance.val);
 	}
+	
+	@Test
+	public void testGenerateEnum() {
+		F instance = generator.generate(F.class);
+		for(int count = 0; instance != F.FIRST; count++, instance = generator.generate(F.class)) {
+			if(count == 50) {
+				fail("Value " + F.FIRST + " wasn't be generated");
+			}
+		}
+		for(int count = 0; instance != F.SECOND; count++, instance = generator.generate(F.class)) {
+			if(count == 50) {
+				fail("Value " + F.SECOND + " wasn't be generated");
+			}
+		}
+		for(int count = 0; instance != F.THIRD; count++, instance = generator.generate(F.class)) {
+			if(count == 50) {
+				fail("Value " + F.THIRD + " wasn't be generated");
+			}
+		}
+		
+		assertNotNull(instance);
+	}
+	
+	@Test
+	public void testGenerateClassWithEum() {
+		G instance = generator.generate(G.class);
+		
+		assertNotNull(instance);
+		assertNotNull(instance.strFeild);
+		assertNotNull(instance.enumField);
+	}
+	
+	@Test
+	public void testSubstitutionForEum() {
+		G instance = generator.generate(G.class, F.SECOND);
+		
+		assertNotNull(instance);
+		assertNotNull(instance.strFeild);
+		assertNotNull(instance.enumField);
+		assertEquals(F.SECOND, instance.enumField);
+	}
+	
 	
 }
