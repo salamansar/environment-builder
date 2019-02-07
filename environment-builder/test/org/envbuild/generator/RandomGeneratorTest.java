@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
@@ -123,26 +124,26 @@ public class RandomGeneratorTest {
     @Test
     public void testGenerateBaseTypesForClass() {
         TestBaseTypesClass testObject = generator.generate(TestBaseTypesClass.class);
-        Assert.assertNotNull(testObject.isBooleanVal());
-        Assert.assertNotNull(testObject.getByteVal());
-        Assert.assertNotNull(testObject.getDateVal());
-        Assert.assertNotNull(testObject.getDoubleVal());
-        Assert.assertNotNull(testObject.getIntVal());
-        Assert.assertNotNull(testObject.getLongVal());
-        Assert.assertNotNull(testObject.getShortVal());
-        Assert.assertNotNull(testObject.getStringVal());
-        Assert.assertNotNull(testObject.getFloatVal());
+        assertNotNull(testObject.isBooleanVal());
+        assertNotNull(testObject.getByteVal());
+        assertNotNull(testObject.getDateVal());
+        assertNotNull(testObject.getDoubleVal());
+        assertNotNull(testObject.getIntVal());
+        assertNotNull(testObject.getLongVal());
+        assertNotNull(testObject.getShortVal());
+        assertNotNull(testObject.getStringVal());
+        assertNotNull(testObject.getFloatVal());
     }
     
     @Test
     public void testGenerateSimpleTypesForClass() {
         TestSimpleTypesClass testObject = generator.generate(TestSimpleTypesClass.class);
-        Assert.assertTrue("invalid value: " + testObject.getByteVal(), testObject.getByteVal() >= 0);
-        Assert.assertTrue("invalid value: " + testObject.getDoubleVal(), testObject.getDoubleVal() >= 0);
-        Assert.assertTrue("invalid value: " + testObject.getIntVal(),testObject.getIntVal() >= 0);
-        Assert.assertTrue("invalid value: " + testObject.getLongVal(),testObject.getLongVal() >= 0);
-        Assert.assertTrue("invalid value: " + testObject.getShortVal(),testObject.getShortVal() >= 0);
-        Assert.assertTrue("invalid value: " + testObject.getFloatVal(),testObject.getFloatVal() >= 0);
+        assertTrue("invalid value: " + testObject.getByteVal(), testObject.getByteVal() >= 0);
+        assertTrue("invalid value: " + testObject.getDoubleVal(), testObject.getDoubleVal() >= 0);
+        assertTrue("invalid value: " + testObject.getIntVal(),testObject.getIntVal() >= 0);
+        assertTrue("invalid value: " + testObject.getLongVal(),testObject.getLongVal() >= 0);
+        assertTrue("invalid value: " + testObject.getShortVal(),testObject.getShortVal() >= 0);
+        assertTrue("invalid value: " + testObject.getFloatVal(),testObject.getFloatVal() >= 0);
     }
     
     @Test
@@ -159,17 +160,17 @@ public class RandomGeneratorTest {
         BigDecimal bigDecimalVal = generator.generate(BigDecimal.class);
         Float floatVal = generator.generate(Float.class);
         
-        Assert.assertNotNull(booleanVal);
-        Assert.assertNotNull(byteVal);
-        Assert.assertNotNull(dateVal);
-        Assert.assertNotNull(doubleVal);
-        Assert.assertNotNull(intVal);
-        Assert.assertNotNull(longVal);
-        Assert.assertNotNull(shortVal);
-        Assert.assertNotNull(stringVal);
-        Assert.assertNotNull(bigIntegerVal);
-        Assert.assertNotNull(bigDecimalVal);
-        Assert.assertNotNull(floatVal);
+        assertNotNull(booleanVal);
+        assertNotNull(byteVal);
+        assertNotNull(dateVal);
+        assertNotNull(doubleVal);
+        assertNotNull(intVal);
+        assertNotNull(longVal);
+        assertNotNull(shortVal);
+        assertNotNull(stringVal);
+        assertNotNull(bigIntegerVal);
+        assertNotNull(bigDecimalVal);
+        assertNotNull(floatVal);
     }
     
     @Test
@@ -186,9 +187,9 @@ public class RandomGeneratorTest {
     @Test
     public void testBigIntegerGeneration() {
         TestBigIntegerClass testClass = generator.generate(TestBigIntegerClass.class);
-        Assert.assertNotNull(testClass.getBigIntVal());
-        Assert.assertNotNull(testClass.getBigDecimalVal());
-		Assert.assertEquals(2, testClass.getBigDecimalVal().scale());
+        assertNotNull(testClass.getBigIntVal());
+        assertNotNull(testClass.getBigDecimalVal());
+		assertEquals(2, testClass.getBigDecimalVal().scale());
     }
     
     @Test
@@ -199,9 +200,9 @@ public class RandomGeneratorTest {
         
         generator.update(instance);
         
-        Assert.assertNotNull(instance.getVal());
-        Assert.assertFalse(str.equals(instance.getVal()));
-        Assert.assertNull(instance.getLink());
+        assertNotNull(instance.getVal());
+        assertFalse(str.equals(instance.getVal()));
+        assertNull(instance.getLink());
     }
     
     @Test
@@ -214,11 +215,11 @@ public class RandomGeneratorTest {
         
         generator.update(instance, true);
         
-        Assert.assertNotNull(instance.getVal());
-        Assert.assertFalse(str.equals(instance.getVal()));
-        Assert.assertNotNull(instance.getLink());
-        Assert.assertNotSame(aInstance, instance.getLink());
-        Assert.assertNotNull(instance.getLink().getS1());
+        assertNotNull(instance.getVal());
+        assertFalse(str.equals(instance.getVal()));
+        assertNotNull(instance.getLink());
+        assertNotSame(aInstance, instance.getLink());
+        assertNotNull(instance.getLink().getS1());
     }
     
     @Test
@@ -232,10 +233,10 @@ public class RandomGeneratorTest {
         
         generator.update(instance, true, newInstance);
         
-        Assert.assertNotNull(instance.getVal());
-        Assert.assertFalse(str.equals(instance.getVal()));
-        Assert.assertNotNull(instance.getLink());
-        Assert.assertSame(newInstance, instance.getLink());
+        assertNotNull(instance.getVal());
+        assertFalse(str.equals(instance.getVal()));
+        assertNotNull(instance.getLink());
+        assertSame(newInstance, instance.getLink());
     }
     
     @Test
@@ -247,20 +248,20 @@ public class RandomGeneratorTest {
         
         generator.update(instance, true, B.class);
         
-        Assert.assertNotNull(instance.getVal());
-        Assert.assertFalse(str.equals(instance.getVal()));
-        Assert.assertNotNull(instance.getLink());
-        Assert.assertNotNull(instance.getLink().getS1());
-        Assert.assertEquals(str, instance.getdVal());
+        assertNotNull(instance.getVal());
+        assertFalse(str.equals(instance.getVal()));
+        assertNotNull(instance.getLink());
+        assertNotNull(instance.getLink().getS1());
+        assertEquals(str, instance.getdVal());
     }
     
     @Test
     public void testSetterInstanceFilling() {
         E instance = generator.generate(E.class);
         
-        Assert.assertNotNull(instance.getVal1());
-        Assert.assertNull(instance.getVal2());
-        Assert.assertNull(instance.getVal3());
+        assertNotNull(instance.getVal1());
+        assertNull(instance.getVal2());
+        assertNull(instance.getVal3());
     }
     
     @Test
@@ -269,11 +270,31 @@ public class RandomGeneratorTest {
         
         E instance = generator.generate(E.class);
 
-        Assert.assertNotNull(instance.getVal1());
-        Assert.assertNotNull(instance.getVal2());
-        Assert.assertNotNull(instance.getVal3());
+        assertNotNull(instance.getVal1());
+        assertNotNull(instance.getVal2());
+        assertNotNull(instance.getVal3());
         
         generator.setFillingStartegy(InstanceFillingStrategy.SETTER);
     }
     
+	@Test
+	public void testGenerateWithObjectSubstitution() {
+		A obj = new A();
+		
+		B instance = generator.generate(B.class, obj);
+		
+		assertNotNull(instance.link);
+		assertSame(obj, instance.link);
+	}
+	
+	@Test
+	public void testGenerateWithSimpleTypeSubstitution() {
+		String str = "someStr";
+		
+		B instance = generator.generate(B.class, true, str);
+
+		assertNotNull(instance.link);
+		assertEquals(str, instance.val);
+	}
+	
 }

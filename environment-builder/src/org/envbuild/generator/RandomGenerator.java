@@ -69,37 +69,39 @@ public class RandomGenerator {
         Object[] params = new Object[classParams.length];
         boolean isInvoke = true;
         for(int i = 0; i < params.length; i++) {
-            if(randomizerFactory.hasRandomizer(classParams[i])) {
-                params[i] = randomizerFactory.getRandomizer(classParams[i]).generateValue();
-            } else if((param != null || isRecursive)
-                    && !(classParams[i] == Object.class)) {
-                
-                if(param != null && param.length > 0) {
-                    params[i] = Iterables.find(Arrays.asList(param),
-                            new ClassComparePredicate(classParams[i]), null);
-                }
-                
-                if(params[i] == null && isRecursive
-                        && !visitedMethods.contains(method)
-                        && !Modifier.isAbstract(classParams[i].getModifiers())
-                        && !classParams[i].isArray()) {
-                    
-                    visitedMethods.add(method);
-                    try {
-                        params[i] = internalGenerate(classParams[i], true, params);
-                    } catch (InstantiationException ex) {
-                        params[i] = null;
-                    }
-                }
-                
-                isInvoke = params[i] != null;
-                if(!isInvoke) {
-                    break;
-                }
-            } else {
-                isInvoke = false;
-                break;
-            }
+			if (param != null 
+					&& param.length > 0 
+					&& !(classParams[i] == Object.class) ) {
+				
+				params[i] = Iterables.find(Arrays.asList(param),
+						new ClassComparePredicate(classParams[i]), null);
+			}
+			
+			if(params[i] == null) {
+				if(randomizerFactory.hasRandomizer(classParams[i])) {
+					params[i] = randomizerFactory.getRandomizer(classParams[i]).generateValue();
+				} else if(isRecursive && !(classParams[i] == Object.class)) {
+					if(!visitedMethods.contains(method)
+							&& !Modifier.isAbstract(classParams[i].getModifiers())
+							&& !classParams[i].isArray()) {
+
+						visitedMethods.add(method);
+						try {
+							params[i] = internalGenerate(classParams[i], true, params);
+						} catch (InstantiationException ex) {
+							params[i] = null;
+						}
+					}
+
+					isInvoke = params[i] != null;
+					if(!isInvoke) {
+						break;
+					}
+				} else {
+					isInvoke = false;
+					break;
+				}
+			}
         }
         if(isInvoke) {
             method.invoke(instance, params);
