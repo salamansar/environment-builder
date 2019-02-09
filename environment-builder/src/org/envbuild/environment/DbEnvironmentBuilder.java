@@ -1,5 +1,6 @@
 package org.envbuild.environment;
 
+import com.google.common.collect.Maps;
 import org.envbuild.generator.RandomGenerator;
 
 import java.util.HashMap;
@@ -7,12 +8,15 @@ import java.util.Map;
 import org.envbuild.generator.processor.DomainPersister;
 
 /**
- * @author kovlyashenko
+ * @author Salamansar
  */
 public class DbEnvironmentBuilder {
     protected RandomGenerator randomGenerator;
     protected DomainPersister domainPersister;
     protected DbEnvironment environment;
+	
+	protected Map<Class<?>, Object> parentsMap = new HashMap<Class<?>, Object>(5);
+	private Object lastObject;
 
     public DbEnvironmentBuilder() {
     }
@@ -26,10 +30,6 @@ public class DbEnvironmentBuilder {
         this.domainPersister = domainPersister;
     }
 
-    protected Map<Class<?>, Object> parentsMap = new HashMap<Class<?>, Object>(5);
-    private Object lastObject;
-
-
     public DbEnvironmentBuilder newBuild() {
         return newBuild(new DbEnvironment());
     }
@@ -41,12 +41,13 @@ public class DbEnvironmentBuilder {
         return this;
     }
 
-    public DbEnvironmentBuilder createObject(Class<?> className) throws RuntimeException {
-        return createObject(className, true);
+    public DbEnvironmentBuilder createObject(Class<?> className, Object ...params) throws RuntimeException {
+        return createObject(className, true, params);
     }
 
-    public DbEnvironmentBuilder createObject(Class<?> className, boolean isPersist) throws RuntimeException {
-        Object instance = randomGenerator.generate(className, parentsMap.values().toArray());
+    public DbEnvironmentBuilder createObject(Class<?> className, Boolean isPersist, Object ...params) throws RuntimeException {
+		Map<Class<?>, Object> paramsMap = getCombinedParams(params);
+        Object instance = randomGenerator.generate(className, paramsMap.values().toArray());
         environment.addObject(className, instance);
         lastObject = instance;
         if (isPersist && domainPersister != null) {
@@ -54,6 +55,18 @@ public class DbEnvironmentBuilder {
         }
         return this;
     }
+	
+	private Map<Class<?>, Object> getCombinedParams(Object[] params) {
+		if(params == null || params.length == 0) {
+			return parentsMap;
+		} else {
+			HashMap<Class<?>, Object> resultParams = Maps.newHashMap(parentsMap);
+			for(Object param : params) {
+				resultParams.put(param.getClass(), param);
+			}
+			return resultParams;
+		}
+	}
 
     public DbEnvironmentBuilder asParent(Class<?> className) {
         return setParent(lastObject, className);
@@ -70,6 +83,7 @@ public class DbEnvironmentBuilder {
     public DbEnvironmentBuilder setParent(Object object, Class<?> className) {
         parentsMap.remove(className);
         parentsMap.put(className, object);
+		lastObject = object;
         return this;
     }
 

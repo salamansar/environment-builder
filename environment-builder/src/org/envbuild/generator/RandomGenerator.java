@@ -9,9 +9,15 @@ import java.util.*;
 import org.envbuild.generator.factory.RandomizerFactory;
 
 /**
- * Класс для заполнения полей с простыми типами случайными данными
- * Не заполняются так же генерик поля
- * @author kovlyashenko
+ * The component is for filling simple fields of objects with random values. <br>
+ * There are some constraints exists:
+ * <ul>
+ * <li>Generic fields aren't filling</li>
+ * <li>A class must be accessible for the generator, i.e. must have "public" modifier </li>
+ * <li>A class must have a public constructor without arguments </li>
+ * </ul>
+ * 
+ * @author Salamansar
  */
 public class RandomGenerator {
     private RandomizerFactory randomizerFactory = new RandomizerFactory();
