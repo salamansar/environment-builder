@@ -118,4 +118,41 @@ public class DbEnvironmentBuilderTest {
 		assertSame(parent, child.parent);
 	}
 	
+	@Test
+	public void generateWithCustomizer() {
+		final Parent parent = new Parent();
+		ObjectCustomizer<Child> customizer = new ObjectCustomizer<Child>() {
+			@Override
+			public void customize(Child object) {
+				object.parent = parent;
+			}
+		};
+		builder.newBuild()
+				.createObject(Child.class, customizer).alias("child");
+		Child child = builder.getEnvironment().getByAlias("child");
+		assertNotNull(child);
+		assertNotNull(child.val);
+		assertNotNull(child.parent);
+		assertSame(parent, child.parent);
+	}
+
+	@Test
+	public void generateReplaceWithCustomizer() {
+		final Parent parent = new Parent();
+		ObjectCustomizer<Child> customizer = new ObjectCustomizer<Child>() {
+			@Override
+			public void customize(Child object) {
+				object.parent = parent;
+			}
+		};
+		builder.newBuild()
+				.createObject(Parent.class).asParent().alias("parent")
+				.createObject(Child.class, customizer).alias("child");
+
+		Child child = builder.getEnvironment().getByAlias("child");
+		assertNotNull(child);
+		assertNotNull(child.val);
+		assertNotNull(child.parent);
+		assertSame(parent, child.parent);
+	}
 }

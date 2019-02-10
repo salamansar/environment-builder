@@ -8,6 +8,9 @@ import java.util.Map;
 import org.envbuild.generator.processor.DomainPersister;
 
 /**
+ * The builder is for creating DbEnvironment and persist them into a database. <br>
+ * Examples of usage:
+ * TODO: fill examples
  * @author Salamansar
  */
 public class DbEnvironmentBuilder {
@@ -46,13 +49,32 @@ public class DbEnvironmentBuilder {
     }
 
     public DbEnvironmentBuilder createObject(Class<?> className, Boolean isPersist, Object ...params) throws RuntimeException {
+        Object instance = generateObject(className, params);
+        addIntoEnvironment(className, instance, isPersist);
+        return this;
+    }
+	
+	private Object generateObject(Class<?> className, Object... params) {
 		Map<Class<?>, Object> paramsMap = getCombinedParams(params);
-        Object instance = randomGenerator.generate(className, paramsMap.values().toArray());
-        environment.addObject(className, instance);
-        lastObject = instance;
-        if (isPersist && domainPersister != null) {
-            domainPersister.persistDomain(lastObject);
-        }
+		return randomGenerator.generate(className, paramsMap.values().toArray());
+	}
+	
+	private void addIntoEnvironment(Class<?> className, Object instance, Boolean isPersist) {
+		environment.addObject(className, instance);
+		lastObject = instance;
+		if (isPersist && domainPersister != null) {
+			domainPersister.persistDomain(lastObject);
+		}
+	}
+	
+	public DbEnvironmentBuilder createObject(Class<?> className, ObjectCustomizer customizer) throws RuntimeException {
+		return createObject(className, true, customizer);
+	}
+	
+    public DbEnvironmentBuilder createObject(Class<?> className, Boolean isPersist, ObjectCustomizer customizer) throws RuntimeException {
+		Object instance = generateObject(className);
+		customizer.customize(instance);
+		addIntoEnvironment(className, instance, isPersist);
         return this;
     }
 	
