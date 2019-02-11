@@ -1,10 +1,10 @@
 # environment-builder
-Library is made for preparation database for integration tests.
-It may simple generate new objects and fill them with random data with org.envbuild.generator.RandomGenerator.
-Or even more, it may prepare objects for saving them into database with org.envbuild.environment.DbEnvironmentBuilder and preconfigured objects processors org.envbuild.generator.processor.DomainPostProcessor.
+The library is made for helping of creating POJO-classes objects in unit tests cases and database preparation in integration tests cases.
+It may simply generate new objects and fill them with random data with org.envbuild.generator.RandomGenerator.
+Or even more, it may prepare objects for saving them into a database with org.envbuild.environment.DbEnvironmentBuilder and preconfigured objects processors org.envbuild.generator.processor.DomainPostProcessor.
 
 ## Including artifacts into project
-In common case for maven projects you might use following dependency:
+In common case for Maven projects, you might use the following dependency:
 ```xml   
     <dependency>
         <groupId>com.github.salamansar.envbuild</groupId>
@@ -12,7 +12,7 @@ In common case for maven projects you might use following dependency:
         <version>0.8</version>
     </dependency>
 ```
-If you are using the spring framwork, it will be useful to use spring-version of library with preconfigured context-configs:
+If you are using Spring framework, it will be useful to use spring-version of the library with preconfigured context-configs:
 ```xml   
     <dependency>
         <groupId>com.github.salamansar.envbuild</groupId>
@@ -20,19 +20,19 @@ If you are using the spring framwork, it will be useful to use spring-version of
         <version>0.8</version>
     </dependency>
 ```
-## Using of RandomGenerator
-For creation of object org.envbuild.generator.RandomGenerator is used. 
+## RandomGenerator
+For creation of an object, org.envbuild.generator.RandomGenerator is used. 
 ```java
     RandomGenerator generator = new RandomGenerator();
     SomeClass obj = generator.generate(SomeClass.class); 
 ```
-There SomeClass is a POJO-class, which contains simple fields like String, Double, etc with getters and setters. After generation it will be filled with random values.
-If class contains not-simple fields with some other class, then this filed will not be filled be default. For recursive generations such objects you might turn on this feature with special flag:
+There SomeClass is a POJO-class, which contains simple fields like String, Double, etc, with getters and setters. After generation, it will be filled with random values.
+If a class contains not-simple fields with some other class, then this field will not be filled by default. For recursive generations such objects, you might turn on this feature with the special flag:
 ```java
 	RandomGenerator generator = new RandomGenerator();
 	SomeClass obj = generator.generate(SomeClass.class, true); //flag true enables recursive generation 
 ``` 
-Instead that when you have object, which must be set into some field in the class, then instead directly setting this object, you might pass them into generate method. Generator will find setters by passed objects type and set this property himself.
+Instead, when you have an object, which must be set into some field in a class, then instead directly setting this object, you might pass them into generate method. The generator will find setters by passed objects types and set this property himself.
 Instead
 ```java
 	SomeOtherClass otherObj = ...
@@ -46,3 +46,35 @@ You might use
 	RandomGenerator generator = new RandomGenerator();
 	SomeClass obj = generator.generate(SomeClass.class, otherObj); //property other will be set by generator
 ``` 
+## DbEnvironmentBuilder
+DbEnvironmentBuilder is the component for building a whole hierarchy of objects in a convenient way. Also it may persist created objects into a database.
+### The Configuration of the builder
+
+### Using of DbEnvironmentBuilder
+For creation of an object, createObject method is used:
+```java
+	envBuilder.newBuild()
+		.createObject(SomeClass.class).alias("someAlias");
+``` 
+The `alias` method is used for assign a tag to the created entity. Next, the entity might be received by using this tag.
+```java
+	SomeClass entity = envBuilder.getEnvironment().getByAlias("someAlias");
+``` 
+Suppose we have such hierarchy of two classes:
+```java
+	class Parent {
+		...
+	}
+	class Child {
+		private Parent parent;
+		...
+	}
+``` 
+Then in an IT-test we might create hierarchy with one parent-object and two children:
+```java
+	envBuilder.newBuild()
+		.createObject(Parent.class).asParent()
+			.createObject(Child.class)
+			.createObject(Child.class)
+``` 
+Those children entities will be saved into a database with the link to the created Parent-object. The method `asParent` is used for marking created object to be a parent to any subsequently created object (of course if it contains a field with that object type).

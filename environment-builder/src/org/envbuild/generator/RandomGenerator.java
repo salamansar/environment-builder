@@ -16,7 +16,15 @@ import org.envbuild.generator.factory.RandomizerFactory;
  * <li>A class must be accessible for the generator, i.e. must have "public" modifier </li>
  * <li>A class must have a public constructor without arguments </li>
  * </ul>
- * 
+ * Examples of usage: <br>
+ * Creation of an object:
+ * <pre>
+ * SomeClass obj = generator.generate(SomeClass.class);
+ * </pre>
+ * Create an object with predefined parameters, which will be set into appropriate fields by them types:
+ * <pre>
+ * SomeClass obj = generator.generate(SomeClass.class, param1, param2, param3);
+ * </pre>
  * @author Salamansar
  */
 public class RandomGenerator {
