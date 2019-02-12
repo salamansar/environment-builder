@@ -4,13 +4,13 @@
     <parent>
         <groupId>com.github.salamansar.envbuild</groupId>
         <artifactId>environment-builder-parent</artifactId>
-        <version>0.8.1-SNAPSHOT</version>
+        <version>0.8.1</version>
     </parent>
     <artifactId>environment-builder-spring</artifactId>
     <name>Environment Builder. Spring</name>
     <packaging>jar</packaging>
     <description>
-        Library, which facilitates integration of Environment Builder core
+        The library, which facilitates the integration of Environment Builder core
         with spring-oriented tests.
     </description>
     

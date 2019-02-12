@@ -4,14 +4,14 @@
     <parent>
         <groupId>com.github.salamansar.envbuild</groupId>
         <artifactId>environment-builder-parent</artifactId>
-        <version>0.8.1-SNAPSHOT</version>
+        <version>0.8.1</version>
     </parent>
     <artifactId>environment-builder</artifactId>
     <packaging>jar</packaging>
     
     <name>Environment Builder</name>
     <description>
-        Core library of environment builder. Contains most useful classes
+        The core library of environment builder. Contains most useful classes
         which not bound to any framework.
     </description>
     
