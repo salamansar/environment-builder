@@ -9,7 +9,7 @@ In common case for Maven projects, you might use the following dependency:
     <dependency>
         <groupId>com.github.salamansar.envbuild</groupId>
         <artifactId>environment-builder</artifactId>
-        <version>0.8</version>
+        <version>0.8.1</version>
     </dependency>
 ```
 If you are using Spring framework, it will be useful to use spring-version of the library with preconfigured context-configs:
@@ -17,7 +17,7 @@ If you are using Spring framework, it will be useful to use spring-version of th
     <dependency>
         <groupId>com.github.salamansar.envbuild</groupId>
         <artifactId>environment-builder-spring</artifactId>
-        <version>0.8</version>
+        <version>0.8.1</version>
     </dependency>
 ```
 ## RandomGenerator
